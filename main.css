@@ -1,0 +1,25 @@
+.link-object {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    padding : 20px;
+    justify-content: space-around;
+
+}
+.button {
+  background-color: #555555;
+  color: white;
+padding: 64px 128px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
+body {
+    text-align: center ;
+}
