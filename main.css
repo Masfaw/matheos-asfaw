@@ -9,9 +9,9 @@
 
 }
 .button {
-  background-color: #555555;
+  background-color: #16162e;
   color: white;
-padding: 64px 128px;
+  padding: 64px 128px;
   margin: 10px;
   text-align: center;
   text-decoration: none;
@@ -22,4 +22,5 @@ padding: 64px 128px;
 
 body {
     text-align: center ;
+    font-family: Righteous;
 }

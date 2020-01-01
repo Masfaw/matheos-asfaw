@@ -1,8 +1,10 @@
 class Walker {
-    constructor() {
-        this.x = window.innerWidth / 2;
-        this.y = window.innerHeight / 2;
-        this.size = 15;
+    constructor(size, width, height) {
+        this.x = Math.floor(width / 2);
+        this.y = Math.floor(height / 2);
+        this.size = size;
+        this.width = width;
+        this.height = height;
     }
 
     drawWalker = () => {
@@ -34,13 +36,21 @@ class Walker {
         this.x += dir[num][0];
         this.y += dir[num][1];
         this.checkBounds();
+        if (this.x === Math.floor(this.width / 2)) {
+            this.getRandomColor();
+        }
     }
 
     checkBounds = () => {
-        this.x = this.x > window.innerWidth - this.size ? this.size : this.x;
-        this.x = this.x < 0 + this.size ? window.innerWidth - this.size : this.x;
-        this.y = this.y > window.innerHeight ? this.size : this.y;
-        this.y = this.y < 0 + this.size ? window.innerHeight - this.size : this.y;
+        this.x = this.x > this.width ? Math.floor(this.width / 2) : this.x;
+        this.x = this.x < 0 ? Math.floor(this.width / 2) : this.x;
+        this.y = this.y > this.height ? Math.floor(this.height / 2) : this.y;
+        this.y = this.y < 0 ? Math.floor(this.height / 2) : this.y;
+    }
+
+    getRandomColor = () => {
+        console.log("hellos");
+
     }
 }
 

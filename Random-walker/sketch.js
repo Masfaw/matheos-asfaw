@@ -1,8 +1,11 @@
 var walker;
 function setup() {
-    let reduce = 20;
-    createCanvas(window.innerWidth - reduce, window.innerHeight - reduce);
-    walker = new Walker();
+    let walkerSize = 5;
+    let width = Math.floor(window.innerWidth / walkerSize) * walkerSize - 20;
+    let height = Math.floor(window.innerHeight / walkerSize) * walkerSize - 20;
+    createCanvas(width, height);
+    background(255);
+    walker = new Walker(walkerSize, width, height);
     console.log(window.innerWidth, window.innerHeight);
 }
 
