@@ -1,17 +1,20 @@
 class Walker {
-    constructor(size, width, height) {
+    constructor(size, width, height, colors) {
         this.x = Math.floor(width / 2);
         this.y = Math.floor(height / 2);
         this.size = size;
         this.width = width;
         this.height = height;
+        this.colors = colors
         this.setRandomStaringLocation();
+        this.colorIndex = this.getRandomColorIndex();
     }
 
     drawWalker = () => {
         push();
         noStroke();
-        fill(20, 50);
+        let c = this.colors[this.colorIndex];
+        fill(c[0], c[1], c[2], 50);
         ellipse(this.x, this.y, this.size, this.size);
         pop();
     }
@@ -37,20 +40,14 @@ class Walker {
         this.x += dir[num][0];
         this.y += dir[num][1];
         this.checkBounds();
-        // if (this.x === Math.floor(this.width / 2)) {
-        //     this.settRandomColor();
-        // }
     }
 
     checkBounds = () => {
 
         if (this.x > this.width || this.x < 0 || this.y > this.height || this.y < 0) {
             this.setRandomStaringLocation();
+            this.colorIndex = this.getRandomColorIndex();
         }
-        // this.x = this.x > this.width ? Math.floor(this.width / 2) : this.x;
-        // this.x = this.x < 0 ? Math.floor(this.width / 2) : this.x;
-        // this.y = this.y > this.height ? Math.floor(this.height / 2) : this.y;
-        // this.y = this.y < 0 ? Math.floor(this.height / 2) : this.y;
     }
 
     setRandomStaringLocation = () => {
@@ -58,10 +55,8 @@ class Walker {
         this.y = (Math.floor(Math.random() * (this.height / this.size))) * this.size;
     }
 
-    settRandomColor = () => {
-        // TODO : Implement this so that a random color is assigned to the object
-        console.log("hellos");
-
+    getRandomColorIndex = () => {
+        return Math.floor(Math.random() * this.colors.length)
     }
 }
 
