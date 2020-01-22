@@ -1,6 +1,3 @@
-// import util from '../../util/util';
-// let util = require('../../util/util');
-
 class FlowField {
     constructor(resolution) {
         this.resolution = resolution;
@@ -54,12 +51,9 @@ class FlowField {
     }
 
     drawVector = (v, x, y, scale) => {
-
-
         push()
         let arrowSize = 4;
         translate(x, y);
-        // stroke(50, 100);
         stroke(0, 10, 255, 20);
         rotate(v.heading());
         let len = v.mag() * scale;

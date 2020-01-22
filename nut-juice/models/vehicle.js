@@ -62,19 +62,5 @@ class Vehicle {
         fill(0, 0, 255, 100);
         noStroke();
         ellipse(this.position.x, this.position.y, 2, 2);
-        // let theta = this.velocity.heading() + PI / 2;
-        // fill(127, 150);
-        // // stroke(200);
-        // noStroke()
-        // strokeWeight(1);
-        // push();
-        // translate(this.position.x, this.position.y);
-        // rotate(theta);
-        // beginShape();
-        // vertex(0, -this.radius * 2);
-        // vertex(-this.radius, this.radius * 2);
-        // vertex(this.radius, this.radius * 2);
-        // endShape(CLOSE);
-        // pop();
     }
 }
