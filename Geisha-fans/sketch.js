@@ -1,20 +1,14 @@
 let flowFeild;
-let zoff = 0
+let zoff = 0;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    flowFeild = new FlowField(50);
+    flowFeild = new FlowField(12);
 }
 
 function draw() {
-    background(255, 5);
-    vehicles.forEach(vehicle => {
-        vehicle.follow(flowFeild);
-        vehicle.run();
-    })
+    background(255, 10);
     flowFeild.displayFlowFeild();
     flowFeild.nextStep(zoff);
     zoff += 0.01;
 }
-
-
