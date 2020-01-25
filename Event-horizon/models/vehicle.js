@@ -9,33 +9,33 @@ class Vehicle {
         this.age = 0;
     }
 
-    run = () => {
+    run() {
         this.age++;
         this.checkAge();
         this.update();
         this.checkBoarders();
         this.display();
-    };
-    applyForce = force => {
+    }
+    applyForce(force) {
         this.acceleration.add(force);
-    };
+    }
 
-    update = () => {
+    update() {
         this.velocity.add(this.acceleration);
         this.velocity.limit(this.maxSpeed);
         this.position.add(this.velocity);
         this.acceleration.mult(0);
-    };
+    }
 
-    follow = flowFeild => {
+    follow(flowFeild) {
         let desired = flowFeild.lookup(this.position);
         desired.mult(this.maxSpeed);
         let steer = p5.Vector.sub(desired, this.velocity);
         steer.limit(this.maxForce);
         this.applyForce(steer);
-    };
+    }
 
-    checkBoarders = () => {
+    checkBoarders() {
         if (
             this.position.x > window.innerWidth ||
             this.position.y > window.innerHeight ||
@@ -44,7 +44,7 @@ class Vehicle {
         ) {
             this.resetLocation();
         }
-    };
+    }
 
     resetLocation() {
         // reset the location to some thing random
@@ -62,10 +62,9 @@ class Vehicle {
             this.resetLocation();
             this.age = 0;
         }
-
     }
 
-    seek = target => {
+    seek(target) {
         // steering = desired - velocity
         let desired = p5.Vector.sub(target, this.position);
 
@@ -79,11 +78,11 @@ class Vehicle {
         let steering = p5.Vector.sub(desired, this.velocity);
         steering.limit(this.maxForce);
         this.applyForce(steering);
-    };
+    }
 
-    display = () => {
+    display() {
         fill(0, 0, 255);
         noStroke();
         ellipse(this.position.x, this.position.y, 2, 2);
-    };
+    }
 }

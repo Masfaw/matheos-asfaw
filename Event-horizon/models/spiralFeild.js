@@ -19,13 +19,13 @@ class SpiralField {
         }
     }
 
-    lookup = lookup => {
+    lookup(lookup) {
         let column = Math.floor(constrain(lookup.x / this.resolution, 0, this.cols - 1));
         let row = Math.floor(constrain(lookup.y / this.resolution, 0, this.rows - 1));
         return this.field[column][row].copy();
-    };
+    }
 
-    displaySpiralField = () => {
+    displaySpiralField() {
         for (let i = 0; i < this.cols; i++) {
             for (let j = 0; j < this.rows; j++) {
                 this.drawVector(
@@ -36,7 +36,7 @@ class SpiralField {
                 );
             }
         }
-    };
+    }
 
     drawVector = (v, x, y, scale) => {
         push();
