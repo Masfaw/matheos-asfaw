@@ -2,11 +2,12 @@ class SpiralField {
     constructor(center, resolution) {
         this.resolution = resolution;
         this.center = center.copy();
-        this.cols = window.innerWidth / this.resolution + 2;
-        this.rows = window.innerHeight / this.resolution + 2;
+        this.cols = window.innerWidth / this.resolution;
+        this.rows = window.innerHeight / this.resolution;
         let util = new Util();
         this.field = util.make2dArray(this.cols);
         this.createSpiralField(this.center);
+        console.log(this.feild);
     }
 
     createSpiralField(target) {
@@ -23,7 +24,11 @@ class SpiralField {
     lookup(lookup) {
         let column = Math.floor(constrain(lookup.x / this.resolution, 0, this.cols - 1));
         let row = Math.floor(constrain(lookup.y / this.resolution, 0, this.rows - 1));
-        return this.field[column][row].copy();
+        if (this.field[column][row]) {
+            return this.field[column][row].copy();
+        } else {
+            console.log("failed lookup on ", column, row);
+        }
     }
 
     displaySpiralField() {
