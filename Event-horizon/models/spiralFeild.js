@@ -4,7 +4,8 @@ class SpiralField {
         this.center = center.copy();
         this.cols = window.innerWidth / this.resolution + 2;
         this.rows = window.innerHeight / this.resolution + 2;
-        this.field = Util.make2dArray(this.cols);
+        let util = new Util();
+        this.field = util.make2dArray(this.cols);
         this.createSpiralField(this.center);
     }
 
