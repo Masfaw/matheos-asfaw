@@ -3,7 +3,7 @@ let vehicles = [];
 let zoff = 0;
 
 function setup() {
-    console.log("Mobile fix 1");
+    console.log("Mobile fix 2");
 
     createCanvas(window.innerWidth, window.innerHeight);
     let center = createVector(width / 2, height / 2);
