@@ -38,7 +38,7 @@ class SpiralField {
         }
     }
 
-    drawVector = (v, x, y, scale) => {
+    drawVector(v, x, y, scale) {
         push();
         let arrowSize = 4;
         translate(x, y);
@@ -47,5 +47,5 @@ class SpiralField {
         let len = v.mag() * scale;
         line(0, 0, len, 0);
         pop();
-    };
+    }
 }

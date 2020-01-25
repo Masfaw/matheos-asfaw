@@ -3,6 +3,8 @@ let vehicles = [];
 let zoff = 0;
 
 function setup() {
+    console.log("Mobile fix 1");
+
     createCanvas(window.innerWidth, window.innerHeight);
     let center = createVector(width / 2, height / 2);
     spiralField = new SpiralField(center, 5);
@@ -24,7 +26,6 @@ function draw() {
         vehicle.follow(spiralField);
         vehicle.run();
     });
-
 
     spiralField.createSpiralField(target);
 }
