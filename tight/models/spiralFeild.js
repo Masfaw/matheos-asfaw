@@ -4,7 +4,8 @@ class SpiralField {
         this.center = center.copy();
         this.cols = window.innerWidth / this.resolution + 2;
         this.rows = window.innerHeight / this.resolution + 2;
-        this.field = Util.make2dArray(this.cols);
+        let util = new Util();
+        this.field = util.make2dArray(this.cols);
         this.createSpiralField();
     }
 
@@ -19,13 +20,13 @@ class SpiralField {
         }
     }
 
-    lookup = lookup => {
+    lookup(lookup) {
         let column = Math.floor(constrain(lookup.x / this.resolution, 0, this.cols - 1));
         let row = Math.floor(constrain(lookup.y / this.resolution, 0, this.rows - 1));
         return this.field[column][row].copy();
-    };
+    }
 
-    displaySpiralField = () => {
+    displaySpiralField() {
         for (let i = 0; i < this.cols; i++) {
             for (let j = 0; j < this.rows; j++) {
                 this.drawVector(
@@ -36,9 +37,9 @@ class SpiralField {
                 );
             }
         }
-    };
+    }
 
-    drawVector = (v, x, y, scale) => {
+    drawVector(v, x, y, scale) {
         push();
         let arrowSize = 4;
         translate(x, y);
@@ -47,5 +48,5 @@ class SpiralField {
         let len = v.mag() * scale;
         line(0, 0, len, 0);
         pop();
-    };
+    }
 }
