@@ -6,11 +6,12 @@ class FlowField {
         this.resolution = resolution;
         this.cols = window.innerWidth / this.resolution;
         this.rows = window.innerHeight / this.resolution;
-        this.field = Util.make2dArray(this.cols);
+        let util = new Util();
+        this.field = util.make2dArray(this.cols);
         this.initFeild();
     }
 
-    initFeild = () => {
+    initFeild() {
         let seed = Math.floor(random(10000));
         console.log(seed);
         noiseSeed(seed);
@@ -25,9 +26,9 @@ class FlowField {
             }
             xoff += 0.01;
         }
-    };
+    }
 
-    nextStep = zoff => {
+    nextStep(zoff) {
         let xoff = 0;
         for (let i = 0; i < this.cols; i++) {
             let yoff = 0;
@@ -38,14 +39,14 @@ class FlowField {
             }
             xoff += 0.01;
         }
-    };
+    }
 
-    lookup = lookup => {
+    lookup(lookup) {
         let column = Math.floor(constrain(lookup.x / this.resolution, 0, this.cols - 1));
         let row = Math.floor(constrain(lookup.y / this.resolution, 0, this.rows - 1));
         return this.field[column][row].copy();
-    };
-    displayFlowFeild = () => {
+    }
+    displayFlowFeild() {
         for (let i = 0; i < this.cols; i++) {
             for (let j = 0; j < this.rows; j++) {
                 this.drawVector(
@@ -56,9 +57,9 @@ class FlowField {
                 );
             }
         }
-    };
+    }
 
-    drawVector = (v, x, y, scale) => {
+    drawVector(v, x, y, scale) {
         push();
         let arrowSize = 4;
         translate(x, y);
@@ -68,5 +69,5 @@ class FlowField {
         let len = v.mag() * scale;
         line(0, 0, len, 0);
         pop();
-    };
+    }
 }
