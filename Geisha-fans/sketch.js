@@ -3,7 +3,7 @@ let zoff = 0;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    flowFeild = new FlowField(12);
+    flowFeild = new FlowField(14);
 }
 
 function draw() {
