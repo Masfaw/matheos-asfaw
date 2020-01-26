@@ -5,12 +5,12 @@ class Walker {
         this.size = size;
         this.width = width;
         this.height = height;
-        this.colors = colors
+        this.colors = colors;
         this.setRandomStaringLocation();
         this.colorIndex = this.getRandomColorIndex();
     }
 
-    drawWalker = () => {
+    drawWalker() {
         push();
         noStroke();
         let c = this.colors[this.colorIndex];
@@ -19,22 +19,27 @@ class Walker {
         pop();
     }
 
-    walk = () => {
-        // uncomment this if you want to use only caridnal steps and not diagonal steps 
+    walk() {
+        // uncomment this if you want to use only caridnal steps and not diagonal steps
         // let dir = [
         //     [0, this.size], [this.size, 0], [0, -this.size], [-this.size, 0]
         // ];
 
         /**
          * the following arrows show the arrangment of the array in terms of direction reletive to the walker location
-         *  \  |  / 
-         *   - o -  
-         *  /  |  \    
+         *  \  |  /
+         *   - o -
+         *  /  |  \
          */
         let dir = [
-            [-this.size, -this.size], [0, -this.size], [this.size, -this.size],
-            [-this.size, 0], [this.size, 0],
-            [-this.size, this.size], [0, this.size], [this.size, this.size]
+            [-this.size, -this.size],
+            [0, -this.size],
+            [this.size, -this.size],
+            [-this.size, 0],
+            [this.size, 0],
+            [-this.size, this.size],
+            [0, this.size],
+            [this.size, this.size]
         ];
         let num = Math.floor(Math.random() * dir.length);
         this.x += dir[num][0];
@@ -42,21 +47,19 @@ class Walker {
         this.checkBounds();
     }
 
-    checkBounds = () => {
-
+    checkBounds() {
         if (this.x > this.width || this.x < 0 || this.y > this.height || this.y < 0) {
             this.setRandomStaringLocation();
             this.colorIndex = this.getRandomColorIndex();
         }
     }
 
-    setRandomStaringLocation = () => {
-        this.x = (Math.floor(Math.random() * (this.width / this.size))) * this.size;
-        this.y = (Math.floor(Math.random() * (this.height / this.size))) * this.size;
+    setRandomStaringLocation() {
+        this.x = Math.floor(Math.random() * (this.width / this.size)) * this.size;
+        this.y = Math.floor(Math.random() * (this.height / this.size)) * this.size;
     }
 
-    getRandomColorIndex = () => {
-        return Math.floor(Math.random() * this.colors.length)
+    getRandomColorIndex() {
+        return Math.floor(Math.random() * this.colors.length);
     }
 }
-
