@@ -8,23 +8,23 @@ class Vehicle {
         this.radius = 5;
     }
 
-    run = () => {
+    run() {
         this.update();
         this.checkBoarders();
         this.display();
     }
-    applyForce = force => {
+    applyForce(force) {
         this.acceleration.add(force);
-    };
+    }
 
-    update = () => {
+    update() {
         this.velocity.add(this.acceleration);
         this.velocity.limit(this.maxSpeed);
         this.position.add(this.velocity);
         this.acceleration.mult(0);
     }
 
-    follow = (flowFeild) => {
+    follow(flowFeild) {
         let desired = flowFeild.lookup(this.position);
         desired.mult(this.maxSpeed);
         let steer = p5.Vector.sub(desired, this.velocity);
@@ -32,23 +32,30 @@ class Vehicle {
         this.applyForce(steer);
     }
 
-    checkBoarders = () => {
-        if (this.position.x > window.innerWidth || this.position.y > window.innerHeight ||
-            this.position.x < 0 || this.position.y < 0) {
+    checkBoarders() {
+        if (
+            this.position.x > window.innerWidth ||
+            this.position.y > window.innerHeight ||
+            this.position.x < 0 ||
+            this.position.y < 0
+        ) {
             // reset the location to some thing random
-            let newLocation = createVector(Math.floor(random(0, window.innerWidth)), Math.floor(random(0, window.innerHeight)));
+            let newLocation = createVector(
+                Math.floor(random(0, window.innerWidth)),
+                Math.floor(random(0, window.innerHeight))
+            );
             this.position = newLocation;
         }
     }
 
-    seek = (target) => {
-        // steering = desired - velocity 
+    seek(target) {
+        // steering = desired - velocity
         let desired = p5.Vector.sub(target, this.position);
 
         let d = desired.mag();
         if (d < 200) {
             let magnitude = map(d, 0, 100, 0, this.maxSpeed);
-            desired.setMag(magnitude)
+            desired.setMag(magnitude);
         } else {
             desired.setMag(this.maxSpeed);
         }
@@ -57,24 +64,9 @@ class Vehicle {
         this.applyForce(steering);
     }
 
-    display = () => {
-
+    display() {
         fill(255, 0, 0, 20);
         noStroke();
         ellipse(this.position.x, this.position.y, 2, 2);
-        // let theta = this.velocity.heading() + PI / 2;
-        // fill(127, 150);
-        // // stroke(200);
-        // noStroke()
-        // strokeWeight(1);
-        // push();
-        // translate(this.position.x, this.position.y);
-        // rotate(theta);
-        // beginShape();
-        // vertex(0, -this.radius * 2);
-        // vertex(-this.radius, this.radius * 2);
-        // vertex(this.radius, this.radius * 2);
-        // endShape(CLOSE);
-        // pop();
     }
 }
