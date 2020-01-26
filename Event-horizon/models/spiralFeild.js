@@ -22,12 +22,10 @@ class SpiralField {
     }
 
     lookup(lookup) {
-        let column = Math.floor(constrain(lookup.x / this.resolution, 0, this.cols - 1));
-        let row = Math.floor(constrain(lookup.y / this.resolution, 0, this.rows - 1));
+        let column = Math.abs(Math.floor(constrain(lookup.x / this.resolution, 0, this.cols - 1)));
+        let row = Math.abs(Math.floor(constrain(lookup.y / this.resolution, 0, this.rows - 1)));
         if (this.field[column][row]) {
             return this.field[column][row].copy();
-        } else {
-            console.log("failed lookup on ", column, row);
         }
     }
 

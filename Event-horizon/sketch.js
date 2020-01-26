@@ -1,12 +1,13 @@
 let spiralField;
 let vehicles = [];
 let zoff = 0;
+let center;
 
 function setup() {
     console.log("Mobile fix 3");
 
     createCanvas(window.innerWidth, window.innerHeight);
-    let center = createVector(width / 2, height / 2);
+    center = createVector(window.innerWidth / 2, window.innerHeight / 2);
     spiralField = new SpiralField(center, 5);
     for (let i = 0; i < 1000; i++) {
         let randomLocation = createVector(
@@ -20,7 +21,12 @@ function setup() {
 }
 
 function draw() {
-    let target = createVector(mouseX, mouseY);
+    let target;
+    if (mouseX > 0 && mouseY > 0) {
+        target = createVector(mouseX, mouseY);
+    } else {
+        target = center;
+    }
     background(255, 20);
     vehicles.forEach(vehicle => {
         vehicle.follow(spiralField);
