@@ -8,25 +8,25 @@ class Vehicle {
         this.radius = 5;
     }
 
-    applyForce = force => {
+    applyForce(force) {
         this.acceleration.add(force);
-    };
+    }
 
-    update = () => {
+    update() {
         this.velocity.add(this.acceleration);
         this.velocity.limit(this.maxSpeed);
         this.position.add(this.velocity);
         this.acceleration.set(0, 0);
     }
 
-    seek = (target) => {
-        // steering = desired - velocity 
+    seek(target) {
+        // steering = desired - velocity
         let desired = p5.Vector.sub(target, this.position);
 
         let d = desired.mag();
         if (d < 200) {
             let magnitude = map(d, 0, 100, 0, this.maxSpeed);
-            desired.setMag(magnitude)
+            desired.setMag(magnitude);
         } else {
             desired.setMag(this.maxSpeed);
         }
@@ -35,7 +35,7 @@ class Vehicle {
         this.applyForce(steering);
     }
 
-    display = () => {
+    display() {
         let theta = this.velocity.heading() + PI / 2;
         fill(127);
         stroke(200);
