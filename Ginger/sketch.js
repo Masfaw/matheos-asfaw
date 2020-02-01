@@ -2,7 +2,8 @@ let flowFeild;
 let vehicles = [];
 
 function setup() {
-    createCanvas(window.innerWidth, window.innerHeight);
+    let canvas = createCanvas(window.innerWidth, window.innerHeight);
+    canvas.position(0, 0);
     // vehicle = new Vehicle(320, 180);
     flowFeild = new FlowField(5);
     background(255);
@@ -12,7 +13,7 @@ function setup() {
         let randomLocation = createVector(Math.floor(random(0, window.innerWidth)), Math.floor(random(0, window.innerHeight)));
         vehicles.push(new Vehicle(randomLocation.x, randomLocation.y));
     }
-
+    document.body.style.overflow = 'hidden';
 }
 
 function draw() {
