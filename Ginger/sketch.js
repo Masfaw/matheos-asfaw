@@ -8,7 +8,7 @@ function setup() {
     background(255);
     // flowFeild.displayFlowFeild();
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 5000; i++) {
         let randomLocation = createVector(Math.floor(random(0, window.innerWidth)), Math.floor(random(0, window.innerHeight)));
         vehicles.push(new Vehicle(randomLocation.x, randomLocation.y));
     }
