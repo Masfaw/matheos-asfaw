@@ -10,13 +10,13 @@ class FlowField {
 
     initFeild() {
         let mult = random(0, 32);
+        console.log("MULT", mult);
         noiseSeed(Math.floor(random(10000)));
         let xoff = 0;
         for (let i = 0; i < this.cols; i++) {
             let yoff = 0;
             for (let j = 0; j < this.rows; j++) {
                 let theta = map(noise(xoff, yoff), 0, 1, 0, TWO_PI * mult);
-
                 this.field[i][j] = createVector(cos(theta), sin(theta));
                 yoff += 0.01;
             }
