@@ -23,4 +23,5 @@
 body {
     text-align: center ;
     font-family: Righteous;
+    overflow: hidden;
 }
