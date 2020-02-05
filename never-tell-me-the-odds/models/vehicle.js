@@ -4,7 +4,7 @@ class Vehicle {
         this.acceleration = createVector(0, 0);
         this.velocity = createVector(0, 0);
         this.maxSpeed = maxSpeed || 2;
-        this.maxForce = maxForce || 2;
+        this.maxForce = 20000;
         this.radius = 10;
     }
 
@@ -28,22 +28,14 @@ class Vehicle {
         let desired = flowFeild.lookup(this.position);
         desired.mult(this.maxSpeed);
         let steer = p5.Vector.sub(desired, this.velocity);
-        steer.limit(this.maxForce);
+        // steer.limit(this.maxForce);
         this.applyForce(steer);
     }
 
     checkBoarders() {
-        if (
-            this.position.x > window.innerWidth ||
-            this.position.y > window.innerHeight ||
-            this.position.x < 0 ||
-            this.position.y < 0
-        ) {
+        if (this.position.x > window.innerWidth || this.position.y > window.innerHeight || this.position.x < 0 || this.position.y < 0) {
             // reset the location to some thing random
-            let newLocation = createVector(
-                Math.floor(random(0, window.innerWidth)),
-                Math.floor(random(0, window.innerHeight))
-            );
+            let newLocation = createVector(Math.floor(random(0, window.innerWidth)), Math.floor(random(0, window.innerHeight)));
             this.position = newLocation;
         }
     }
@@ -65,7 +57,7 @@ class Vehicle {
     }
 
     display() {
-        fill(0, 0, 255, 100);
+        fill(8, 146, 208, 150);
         noStroke();
         ellipse(this.position.x, this.position.y, 2, 2);
     }

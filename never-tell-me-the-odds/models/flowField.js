@@ -8,29 +8,32 @@ class FlowField {
         this.nextStep(0);
     }
 
-    // initFeild() {
-    //     let seed = Math.floor(random(10000));
-    //     console.log(seed);
-    //     noiseSeed(seed);
-    //     let xoff = 0;
-    //     for (let i = 0; i < this.cols; i++) {
-    //         let yoff = 0;
-    //         for (let j = 0; j < this.rows; j++) {
-    //             let theta = map(noise(xoff, yoff), 0, 1, 0, TWO_PI * 2);
+    createSpiralField(center) {
+        for (let i = 0; i < this.cols; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                let transI = i - floor(center.x / this.resolution);
+                let transJ = j - floor(center.y / this.resolution);
+                this.field[i][j] = createVector(transJ - transI, -transI - transJ);
+                this.field[i][j].setMag(1);
+            }
+        }
+    }
 
-    //             this.field[i][j] = createVector(cos(theta), sin(theta));
-    //             yoff += 0.01;
-    //         }
-    //         xoff += 0.01;
-    //     }
-    // }
+    shootToOrigin() {
+        for (let i = 0; i < this.cols; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.field[i][j] = createVector(-10, -10);
+                this.field[i][j].setMag(1000);
+            }
+        }
+    }
 
     nextStep(zoff) {
         let xoff = 0;
         for (let i = 0; i < this.cols; i++) {
             let yoff = 0;
             for (let j = 0; j < this.rows; j++) {
-                let theta = map(noise(xoff, yoff, zoff), 0, 1, 0, TWO_PI * 1.5);
+                let theta = map(noise(xoff, yoff, zoff), 0, 1, 0, TWO_PI * 2.5);
                 this.field[i][j] = createVector(cos(theta), sin(theta));
                 yoff += 0.01;
             }
@@ -46,12 +49,7 @@ class FlowField {
     displayFlowFeild() {
         for (let i = 0; i < this.cols; i++) {
             for (let j = 0; j < this.rows; j++) {
-                this.drawVector(
-                    this.field[i][j],
-                    i * this.resolution,
-                    j * this.resolution,
-                    this.resolution - 2
-                );
+                this.drawVector(this.field[i][j], i * this.resolution, j * this.resolution, this.resolution - 2);
             }
         }
     }
