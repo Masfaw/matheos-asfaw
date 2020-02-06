@@ -1,5 +1,6 @@
 let flowFeild;
 let vehicles = [];
+let timer = 0;
 function setup() {
     let canvas = createCanvas(window.innerWidth, window.innerHeight);
     canvas.position(0, 0);
@@ -17,8 +18,12 @@ function setup() {
 }
 
 function draw() {
+    if (timer > 400) {
+        background(0, 1);
+    }
     vehicles.forEach(vehicle => {
         vehicle.follow(flowFeild);
         vehicle.run();
     });
+    timer++;
 }
