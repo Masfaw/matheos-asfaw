@@ -1,10 +1,5 @@
 # Todo
 
-
-- [ ] Kamehmeha
-  - [ ] Start with Nut juice and change to the event horizon with high speed when mouse click
-  - [ ] After some time send all particles to (0, 0) coordinate or a random one.
-  - [ ] Change the background to black ( some thing dark ) and the particles to electric blue.
 - [ ] Marching Squares
   - [ ] get list of points from random walker
   - [ ] limit the walker to go to the same place more than once
