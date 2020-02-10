@@ -10,7 +10,7 @@ let counter = 1;
 function setup() {
 
     let canvas = createCanvas(window.innerWidth, window.innerHeight);
-    // canvas.position(0, 0);
+    canvas.position(0, 0);
     flowfield = new FlowField(10);
     for (let i = 0; i < 1000; i++) {
         let randomLocation = createVector(Math.floor(random(0, window.innerWidth)), Math.floor(random(0, window.innerHeight)));
@@ -18,12 +18,9 @@ function setup() {
     }
 
     btn = document.createElement('button');
-    // btn.position(0, window.innerHeight)
     btn.textContent = "start recording";
     document.body.appendChild(btn);
     btn.onclick = record;
-
-
     document.body.style.overflow = "hidden";
 }
 
@@ -71,8 +68,4 @@ function record() {
 
 function mouseClicked() {
     btn.click();
-    // record();
-    // timer = 500;
-    // let target = createVector(mouseX, mouseY);
-    // flowfield.createSpiralField(target);
 }
