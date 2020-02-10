@@ -24,4 +24,10 @@ body {
     text-align: center ;
     font-family: Righteous;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+  display: block;
 }
