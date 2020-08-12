@@ -16,7 +16,7 @@ class Rectangle {
         let green = Math.floor(Math.random() * 256);
         let blue = Math.floor(Math.random() * 256);
 
-        if (Math.random() < .1) {
+        if (Math.random() < .3) {
             this.color = [red, green, blue];
         } else {
             this.color = [255, 255, 255]
@@ -28,7 +28,7 @@ class Rectangle {
     render() {
 
         fill(this.color[0], this.color[1], this.color[2]);
-        strokeWeight(4)
+        strokeWeight(8)
         rect(this.xLoc, this.yLoc, this.width, this.height);
     }
 }
