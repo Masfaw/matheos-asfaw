@@ -16,7 +16,7 @@ function setup() {
     background(255);
 
     flowfield = new FlowField(10);
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 500; i++) {
         let randomLocation = createVector(
             Math.floor(random(0, window.innerWidth)),
             Math.floor(random(0, window.innerHeight))
