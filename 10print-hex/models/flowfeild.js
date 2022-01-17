@@ -36,7 +36,7 @@ class FlowField {
             let yoff = 0;
             for (let j = 0; j < this.rows; j++) {
                 let theta = map(noise(xoff, yoff, zoff), 0, 1, 0, TWO_PI);
-                theta = Math.floor((theta/ (TWO_PI/8))) * (TWO_PI/ 8) 
+                theta = Math.floor((theta/ (TWO_PI/8))) * (TWO_PI/8) 
                 this.field[i][j] = createVector(cos(theta), sin(theta));
                 yoff += 0.01;
             }
@@ -58,7 +58,7 @@ class FlowField {
                     this.field[i][j],
                     i * this.resolution,
                     j * this.resolution,
-                    this.lenOfDiagonal -2
+                    this.lenOfDiagonal / 2 
                 );
             }
         }
@@ -67,7 +67,6 @@ class FlowField {
     drawVector(v, x, y, scale) {
         push();
         translate(x, y);
-        // stroke(50, 100);
         stroke(0, 10, 255);
         rotate(v.heading());
         let len = v.mag() * scale;
