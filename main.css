@@ -23,7 +23,7 @@
 body {
     text-align: center ;
     font-family: Righteous;
-    overflow: hidden;
+    overflow: auto;
     margin: 0;
     padding: 0;
 }
