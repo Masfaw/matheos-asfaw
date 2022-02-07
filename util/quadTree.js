@@ -39,39 +39,39 @@ class QuadTree {
         this.boundary = boundary;
         this.capacity = capacity;
         this.points = [];
-        this.hasSplit = false;
+        this.divided = false;
         this.northWest
     }
 
     insert(point) {
-        if (!this.boundary.contains(point)) {
-            return false;
-          }
-      
-          if (this.points.length < this.capacity) {
-            this.points.push(point);
-            return true;
-          } else {
-            if (!this.divided) {
-              this.subdivide();
-            }
-            if (this.northeast.insert(point)) {
-              return true;
-            } else if (this.northwest.insert(point)) {
-              return true;
-            } else if (this.southeast.insert(point)) {
-              return true;
-            } else if (this.southwest.insert(point)) {
-              return true;
-            }
-          }
+      if (!this.boundary.contains(point)) {
+        return false;
+      }
+    
+      if (this.points.length < this.capacity) {
+        this.points.push(point);
+        return true;
+      } else {
+        if (!this.divided) {
+          this.subdivide();
+        }
+        if (this.northeast.insert(point)) {
+          return true;
+        } else if (this.northwest.insert(point)) {
+          return true;
+        } else if (this.southeast.insert(point)) {
+          return true;
+        } else if (this.southwest.insert(point)) {
+          return true;
+        }
+      }
     }
 
     subdivide() {
-        let x = this.boundary.x;
-        let y = this.boundary.y;
-        let w = this.boundary.w;
-        let h = this.boundary.h;
+        let x = this.boundary.xLoc;
+        let y = this.boundary.yLoc;
+        let w = this.boundary.width;
+        let h = this.boundary.height;
         let ne = new QuadTreeRectBoundary(x + w / 2, y - h / 2, w / 2, h / 2);
         this.northeast = new QuadTree(ne, this.capacity);
         let nw = new QuadTreeRectBoundary(x - w / 2, y - h / 2, w / 2, h / 2);
@@ -105,27 +105,43 @@ class QuadTree {
           return found;
     }
 
-    render() {
-        stroke(255);
+    render(options) {
+      stroke(options.strokeColor);
+
+
+      if (options.renderBoundary) {
         noFill();
-        strokeWeight(1);
+        strokeWeight(options.boundaryStroke);
         rectMode(CENTER);
         rect(
             this.boundary.xLoc,
             this.boundary.yLoc,
-            this.boundary.w * 2,
-            this.boundary.h * 2
-        )
-        for (let p of this.points) {
-            strokeWeight(2);
-            point(p.x, p.y);
-          }
+            this.boundary.width * 2,
+            this.boundary.height * 2
+        );
+      }
 
-        if (this.divided) {
-        this.northeast.show();
-        this.northwest.show();
-        this.southeast.show();
-        this.southwest.show();
+      if(options.renderPoints) {
+        for (let p of this.points) {
+          strokeWeight(options.pointsStroke);
+          point(p.xLoc, p.yLoc);
+        }
+      }
+      
+
+        if (this.divided && (options.renderPoints || options.renderBoundary)) {
+          let childOptions = {
+            strokeColor:options.strokeColor,
+            boundaryStroke: options.boundaryStroke/options.divisor,
+            pointsStroke:options.pointsStroke/options.divisor,
+            renderPoints:options.renderPoints,
+            renderBoundary:options.renderBoundary,
+            divisor:options.divisor,
+          }
+          this.northeast.render(childOptions);
+          this.northwest.render(childOptions);
+          this.southeast.render(childOptions);
+          this.southwest.render(childOptions);
         }
     }
 }
