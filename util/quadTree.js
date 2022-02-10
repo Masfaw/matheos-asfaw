@@ -32,6 +32,80 @@ class QuadTreeRectBoundary { // this is for boundary boxes drawn from the center
                 point.yLoc <= this.yLoc + this.height && 
                 point.yLoc >= this.yLoc - this.height;
     }
+
+    render(options) {
+      stroke(options.strokeColor);
+      if (options.renderBoundary) {
+        noFill();
+        strokeWeight(options.boundaryStroke);
+        rectMode(CENTER);
+        rect(
+            this.xLoc,
+            this.yLoc,
+            this.width * 2,
+            this.height * 2
+        );
+      }
+    }
+}
+
+
+class QuadTreeCircleBoundary {
+  constructor(x, y, r) {
+    this.xLoc = x;
+    this.yLoc = y;
+    this.radius = r;
+  }
+
+  intersects(other) {
+
+    if (other instanceof QuadTreeRectBoundary) {
+
+
+      let xDist = Math.abs(other.xLoc - this.xLoc);
+      let yDist = Math.abs(other.yLoc- this.yLoc);
+
+
+      let edges = Math.pow(xDist - other.width, 2) + Math.pow(yDist- other.height, 2);
+
+      // no intersection
+      if (xDist > this.radius + other.width || yDist > this.radius + other.height) {
+        return false;
+      }
+
+      // intersection within the circle
+      if (xDist <= other.width || yDist <= other.height) {
+        return true;
+      }
+
+      //intersection on the edge of the circle 
+      return edges <= (this.radius * this.radius);
+
+    } else if (other instanceof QuadTreeCircleBoundary){
+      console.log("trying to check if its circle");
+      // TODO: if we ever want to check intsection between two circles
+    }
+    console.error("OH NO OH NO OH NO ");
+  }
+
+  contains(point) {
+    let dist = this.calculateDistBetweenPoints(this.xLoc, this.yLoc, point.xLoc, point.yLoc);
+    return (dist <= this.radius);
+  }
+
+
+  calculateDistBetweenPoints(x1, y1, x2,y2) {
+    return Math.sqrt(((x2 -x1) * (x2 -x1)) + ((y2-y1) * (y2-y1)));
+  }
+
+  render(options) {
+    stroke(options.strokeColor);
+    if (options.renderBoundary) {
+      noFill();
+      strokeWeight(options.boundaryStroke);
+      ellipse(this.xLoc, this.yLoc, this.radius * 2);
+    }
+  }
 }
 
 class QuadTree {
@@ -87,7 +161,7 @@ class QuadTree {
         if (!found) {
             found = [];
           }
-          if (!this.boundary.intersects(range)) {
+          if (!range.intersects(this.boundary)) { //!this.boundary.intersects(range)
             return;
           } else {
             for (let p of this.points) {
@@ -133,7 +207,7 @@ class QuadTree {
           let childOptions = {
             strokeColor:options.strokeColor,
             boundaryStroke: options.boundaryStroke/options.divisor,
-            pointsStroke:options.pointsStroke/options.divisor,
+            pointsStroke:options.pointsStroke,
             renderPoints:options.renderPoints,
             renderBoundary:options.renderBoundary,
             divisor:options.divisor,
