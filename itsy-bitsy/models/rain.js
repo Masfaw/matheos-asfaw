@@ -63,8 +63,7 @@ class Rain {
 
     let size = options.size || this.radius;
     let color = options.color || this.color;
-    
-    // console.log("rendering");
+
     let ellipseSize = size || this.radius;
     fill(color[0], color[1], color[2]);
     noStroke();

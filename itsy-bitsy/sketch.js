@@ -20,8 +20,6 @@ let dragPoints = [];
 let quadTreeBoundary;
 
 function setup() {
-    let resolution = 10;
-
     let canvas = createCanvas(window.innerWidth, window.innerHeight);
     canvas.position(0, 0);
 
@@ -39,13 +37,10 @@ function setup() {
         let strength = random(.1 , .5);
         let newAttractor = new Attractor(xLoc, yLoc, radius, strength);
         attractorPoints.push(newAttractor);
-        // let newPoint = new QuadTreePoint(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
-        // quadTree.insert(newPoint);
 
     }
 
-    let numOfRainPoints = 200; // max is 12,000
-    // let speed =  createVector(0,random(5))
+    let numOfRainPoints = 400; // max is 12,000
     for (let i = 0; i < numOfRainPoints; i++) {
         let x = random(window.innerWidth);
         let y = -1 * random(window.innerHeight);
@@ -84,36 +79,10 @@ function draw() {
         })
        
     })
-    
 
-    
     // for each rainPOint call the run function 
     rainPoints.forEach(rainPoint => {
         rainPoint.run();
         rainPoint.render({});
     })
-
-    // // let queryBoundary = new QuadTreeRectBoundary(mouseX, mouseY, 160, 90); 
-    // let circleBoundary = new QuadTreeCircleBoundary(mouseX, mouseY, 200);
-    // let queryBoundaryRenderOPtions = {
-    //     strokeColor: [255, 0 ,0],
-    //     renderBoundary: true ,
-    //     boundaryStroke: 2,
-    // }
-
-    // // queryBoundary.render(queryBoundaryRenderOPtions);
-    // circleBoundary.render(queryBoundaryRenderOPtions);
-
-    // let pointsInBox = quadTree.query(circleBoundary);
-    // push();
-    // stroke(0,255,0);
-    // strokeWeight(8);
-    // pointsInBox.forEach(p => {
-        
-    //     // console.log(p);
-
-    //     point(p.xLoc, p.yLoc);
-        
-    // });
-    // pop();
 }
