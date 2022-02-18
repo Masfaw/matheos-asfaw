@@ -2,9 +2,10 @@
 const CAPACITY = 4;
 
 class QuadTreePoint {
-    constructor(x, y) {
+    constructor(x, y, pl) {
         this.xLoc = x;
         this.yLoc = y;
+        this.payload =pl;
     }
 }
 
