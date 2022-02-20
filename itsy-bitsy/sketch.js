@@ -6,6 +6,7 @@ let quadTree;
 let rainPoints = [];
 let attractorPoints = []
 let looping = false;
+let MAX_NUM_RAIN = 5000;
 
 let renderOptions = {
     strokeColor: 0,
@@ -33,28 +34,26 @@ function setup() {
     for(let i = 0 ; i < 10 ; i ++ ) {
         let xLoc = random(window.innerWidth)
         let yLoc = random(window.innerHeight)
-        let radius = random(80, 100);
+        let radius = random(100, 150);
         let strength = random(.1 , .5);
         let newAttractor = new Attractor(xLoc, yLoc, radius, strength);
         attractorPoints.push(newAttractor);
 
     }
 
-    let numOfRainPoints = 400; // max is 12,000
-    for (let i = 0; i < numOfRainPoints; i++) {
+    document.body.style.overflow = 'hidden';
+}
+
+function draw() {
+    background(255,50);
+
+    if (rainPoints.length < MAX_NUM_RAIN){
         let x = random(window.innerWidth);
         let y = -1 * random(window.innerHeight);
         let speed = createVector(0,1.5)
         let rainPoint = new Rain(x, y,speed)
         rainPoints.push(rainPoint)
     }
-
-
-    document.body.style.overflow = 'hidden';
-}
-
-function draw() {
-    background(255, 5);
 
     quadTree = new QuadTree(quadTreeBoundary, 4);
 
