@@ -3,34 +3,37 @@ class PointCollection {
     this.rows = rows;
     this.cols = cols;
     this.freePointsArray = [];
-    this.pointsMap = new Map();
+    this.freePointsMap = new Map();
     this.occupiedPointsArray = [];
     this._getGridCellCenterPoints();
   }
 
   getRandomFreePoint() {
+    if(this.freePointsArray.length === 0 ) {
+      return false
+    }
     let idx = Math.floor(Math.random() * this.freePointsArray.length);
     this._swapWithLast(idx);
     let point = this.freePointsArray.pop();
     let key = JSON.stringify(point)
-    this.pointsMap.delete(key);
+    this.freePointsMap.delete(key);
     this.occupiedPointsArray.push(point)
     return point;
   }
 
   isPointFree(point) { // point : [c, r]
     let key = JSON.stringify(point);
-    return this.pointsMap.has(key);
+    return this.freePointsMap.has(key);
   }
 
   setPointAsOccupied(point) {
     let key = JSON.stringify(point);
-    let idx = this.pointsMap.get(key);
-    if (!idx) {
-      console.log("THERE WAS NO POINT ", point);
+    let idx = this.freePointsMap.get(key);
+    if (idx === undefined) {
+      throw ("There was not point ", point);
       return
     }
-    this.pointsMap.delete(key);
+    this.freePointsMap.delete(key);
     this._swapWithLast(idx);
     this.freePointsArray.pop();
     this.occupiedPointsArray.push(point);
@@ -38,12 +41,15 @@ class PointCollection {
   }
 
   _swapWithLast(idx) {
+    if (idx == this.freePointsArray.length -1) {
+      return
+    }
     let lastIdx = this.freePointsArray.length -1;
     let temp = this.freePointsArray[lastIdx];
     this.freePointsArray[lastIdx] = this.freePointsArray[idx]
     this.freePointsArray[idx] = temp;
     let key = JSON.stringify(temp);
-    this.pointsMap.set(key, idx);
+    this.freePointsMap.set(key, idx);
   }
 
   _getGridCellCenterPoints() {
@@ -52,7 +58,7 @@ class PointCollection {
         for(let r = 0; r < this.rows; r++ ) {
             this.freePointsArray.push([c, r]);
             let key = JSON.stringify([c, r]);
-            this.pointsMap.set(key, idx);
+            this.freePointsMap.set(key, idx);
             idx ++;
         }
     }
